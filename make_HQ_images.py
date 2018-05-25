@@ -151,9 +151,13 @@ def process_func(idx):
 
 
 def do_the_work(img_num):
+    save_path = os.path.join(delta_dir, 'imgHQ%05d' % img_num)
+    if os.path.exists(save_path + '.npy'):
+        print('Skip already existing image number {}'.format(img_num))
+        return
     print('Create image number {}'.format(img_num))
     img = process_func(img_num)
-    np.save(os.path.join(delta_dir, 'imgHQ%05d' % img_num), [img])
+    np.save(save_path, [img])
 
 # for img_num in range(expected_dat):
 #     do_the_work(img_num)
